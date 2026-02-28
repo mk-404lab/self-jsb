@@ -3,7 +3,7 @@ package com.back.self_jsb.post.service;
 import com.back.self_jsb.post.entity.Post;
 import com.back.self_jsb.post.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +15,7 @@ import java.util.Optional;
 - PostService는 로직 처리 담당
 */
 
-@Component
+@Service    // @Component와 같은 기능, 가독성을 위해 Service 클래스임을 명시하고자 사용
 public class PostService {
 
     @Autowired
