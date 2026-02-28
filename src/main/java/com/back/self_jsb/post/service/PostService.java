@@ -2,7 +2,7 @@ package com.back.self_jsb.post.service;
 
 import com.back.self_jsb.post.entity.Post;
 import com.back.self_jsb.post.repository.PostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +16,10 @@ import java.util.Optional;
 */
 
 @Service    // @Component와 같은 기능, 가독성을 위해 Service 클래스임을 명시하고자 사용
+@RequiredArgsConstructor
 public class PostService {
 
-    @Autowired
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     public Post write(String title, String content){
         Post post = new Post(title, content);

@@ -1,16 +1,16 @@
 package com.back.self_jsb.global;
 
 import com.back.self_jsb.post.service.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class BaseInitData {
 
-    @Autowired
-    private PostService postService;
+    private final PostService postService;
 
     @Bean
     ApplicationRunner initDataRunner() {
