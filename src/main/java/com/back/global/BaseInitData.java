@@ -1,4 +1,4 @@
-package com.back.self_jsb.global;
+package com.back.global;
 
 import com.back.self_jsb.post.entity.Post;
 import com.back.self_jsb.post.service.PostService;
