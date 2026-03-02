@@ -4,20 +4,20 @@ import com.back.self_jsb.post.entity.Post;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@Transactional      // @RollBack는 테스트에서 기본값이므로 생략 가능, 클래스 단위에 트랜잭션을 붙일 경우 그 단위는 메서드에 개별적으로 적용됨(클래스 전체가 트랜잭션 단위가 되는 게 아님, 단순히 중복되는 어노테이션을 한 번에 정의한 것)
+@ActiveProfiles("test")
 public class PostRepositoryTest {
 
     @Autowired
     private PostRepository postRepository;
 
     @Test
-    @Transactional
-    @Rollback
     void t1(){
         Post post = postRepository.findById(2).get();
 
@@ -26,16 +26,7 @@ public class PostRepositoryTest {
         assertThat(post.getContent()).isEqualTo("내용2");
     }
 
-    /*
-    @Transactional로 테스트를 하나의 업무 단위로 지정
-    @Rollback을 통해 하나의 트랜잭션이 종료되면 DB에 반영된 변경을 전부 없었던 일로 원복함
-    => 테스트는 rollback=true가 기본값이다.
-    => 만약 t2에서 rollbac=false로 설정할 경우 원복되지 않기 때문에 BaseInitData에서 저장하는 데이터 2개 + t2에서 저장하는 데이터 1개로 인해 총 3개의 데이터가 저장되므로 t3가 실패하게 됨
-     */
-
     @Test
-    @Transactional
-    @Rollback
     void t2(){
         Post post = new Post("제목3", "내용3");
         Post savedPost = postRepository.save(post);
@@ -46,8 +37,6 @@ public class PostRepositoryTest {
     }
 
     @Test
-    @Transactional
-    @Rollback
     void t3() {
         long cnt = postRepository.count();
         assertThat(cnt).isEqualTo(2);
