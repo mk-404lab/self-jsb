@@ -1,4 +1,4 @@
-package com.back.global;
+package com.back.global.initData;
 
 import com.back.self_jsb.post.entity.Post;
 import com.back.self_jsb.post.service.PostService;
