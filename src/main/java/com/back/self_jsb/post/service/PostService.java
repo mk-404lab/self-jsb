@@ -1,5 +1,6 @@
 package com.back.self_jsb.post.service;
 
+import com.back.self_jsb.member.entity.Member;
 import com.back.self_jsb.post.entity.Post;
 import com.back.self_jsb.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,8 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    public Post write(int authorId, String title, String content){
-        Post post = new Post(authorId, title, content);
+    public Post write(Member author, String title, String content){
+        Post post = new Post(author, title, content);
         return postRepository.save(post);
     }
 
