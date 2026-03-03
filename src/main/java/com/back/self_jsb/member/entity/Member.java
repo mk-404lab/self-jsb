@@ -3,8 +3,12 @@ package com.back.self_jsb.member.entity;
 import com.back.global.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Member extends BaseEntity {
 
     @Column(unique = true)

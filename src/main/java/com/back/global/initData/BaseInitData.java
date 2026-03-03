@@ -1,6 +1,6 @@
 package com.back.global.initData;
 
-import com.back.self_jsb.post.entity.Post;
+import com.back.self_jsb.member.service.MemberService;
 import com.back.self_jsb.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,7 @@ public class BaseInitData {
     private BaseInitData self;
 
     private final PostService postService;
+    private final MemberService memberService;
 
     @Bean
     ApplicationRunner devInitdata() {
@@ -27,7 +28,7 @@ public class BaseInitData {
 
             self.work1();
             self.work2();
-            self.work3();
+
         };
     }
 
@@ -43,13 +44,12 @@ public class BaseInitData {
 
     }
 
-    void work2() {
-        postService.findById(1);
-    }
-
     @Transactional
-    void work3() {
-        Post post = postService.findById(1).get();
-        postService.modify(post, "제목1-1", "내용1-1");
+    void work2() {
+        memberService.join("systemUser", "1234", "시스템");
+        memberService.join("adminUser", "1234", "관리자");
+        memberService.join("user1", "1234", "유저1");
+        memberService.join("user2", "1234", "유저2");
+        memberService.join("user3", "1234", "유저3");
     }
 }
